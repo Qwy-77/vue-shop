@@ -19,3 +19,32 @@ export function getCaptcha(phone) {
     },
   });
 }
+
+//验证验证码
+export function getCaptchaVerify(phone, captcha) {
+  return request({
+    url: "/captcha/verify",
+    params: {
+      phone,
+      captcha,
+    },
+  });
+}
+
+// 登录验证
+export function getLoginCellphone(phone, password) {
+  return request({
+    url: "/login/cellphone",
+    params: {
+      phone,
+      password,
+    },
+  });
+}
+
+// 获取登录状态
+export function getLoginStatus() {
+  return request({
+    url: "/login/status",
+  });
+}

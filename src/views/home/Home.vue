@@ -11,6 +11,7 @@ import Homebar from "./childcomps/HomeBar";
 import HomeSwiper from "./childcomps/HomeSwiper";
 import HomePageBll from "./childcomps/HomePageBll";
 import { getHomeBanner, getHomePag, getRecommend } from "api/home/home";
+import { getLoginStatus } from "api/login/login";
 export default {
   name: "Home",
   components: {
@@ -31,6 +32,8 @@ export default {
     this.getHomePag();
     // 每日推荐歌单数据
     // this.getRecommend();
+    //获取用户登录状态
+    this.getLoginStatus();
   },
   methods: {
     // 轮播图数据
@@ -51,6 +54,14 @@ export default {
     getRecommend() {
       getRecommend().then((res) => {
         console.log(res);
+      });
+    },
+    // 用户登录状态
+    getLoginStatus() {
+      getLoginStatus().then((res) => {
+        if (res.data.data.code === 200) {
+          // this.getRecommend();
+        }
       });
     },
   },

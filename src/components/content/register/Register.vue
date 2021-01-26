@@ -65,14 +65,17 @@ export default {
             // alert("该手机号已经注册过,请直接登录");
             getCaptcha(this.phone).then((res) => {
               this.$router.push({
-                path: "/checkCode",
+                name: "CheckCode",
                 params: { phone: this.phone, password: this.password },
               });
             });
           } else if (res.data.exist === -1) {
             // 发送验证码请求 并携带上 手机号
             getCaptcha(this.phone).then((res) => {
-              this.$router.push("/checkCode/" + this.phone);
+              this.$router.push({
+                name: "CheckCode",
+                params: { phone: this.phone, password: this.password },
+              });
             });
           }
         });

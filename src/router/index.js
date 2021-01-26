@@ -52,7 +52,7 @@ const routes = [
     component: Register,
   },
   {
-    path: "/checkCode/:phone",
+    path: "/checkCode",
     name: "CheckCode",
     component: CheckCode,
   },

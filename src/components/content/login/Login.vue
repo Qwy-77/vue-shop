@@ -1,40 +1,56 @@
 <template>
   <div class="Login">
     <NavBar class="navbar">
-      <div slot="left" @click="gobackClick"><i class="el-icon-arrow-left"></i></div>
+      <div slot="left" @click="gobackClick">
+        <i class="el-icon-arrow-left"></i>
+      </div>
       <div slot="center">手机号登录</div>
     </NavBar>
 
     <div class="reg-item">
       <div class="reg-input">
         <i class="el-icon-mobile-phone"></i>
-        <input type="text" placeholder="输入手机号" />
+        <input type="text" placeholder="输入手机号" v-model="phone" />
       </div>
       <div class="reg-input">
         <i class="el-icon-lock"></i>
-        <input type="password" placeholder="输入密码" />
-      </div>
-      <div class="reg-input">
-        <i class="el-icon-lock"></i>
-        <input type="password" placeholder="确认密码" />
+        <input type="password" placeholder="输入密码" v-model="password" />
       </div>
     </div>
 
-    <button class="button">登录</button>
-  </div>
+    <button class="button" @click="btnClick">登录</button>
   </div>
 </template>
 
 <script>
 import NavBar from "components/common/navbar/NavBar";
+import { getLoginCellphone } from "api/login/login";
 export default {
   name: "Login",
   components: {
     NavBar,
   },
+  data() {
+    return {
+      phone: "",
+      password: "",
+    };
+  },
   methods: {
     gobackClick() {
       this.$router.back();
+    },
+    // 登录按钮
+    btnClick() {
+      getLoginCellphone(this.phone, this.password).then((res) => {
+        if (res.data.code === 200) {
+          // 登陆成功跳转到 首页
+          this.$router.push({ name: "Home" });
+        } else {
+          //登录失败
+          alert("手机号或密码错误,请重新输入");
+        }
+      });
     },
   },
 };
